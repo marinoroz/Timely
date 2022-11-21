@@ -1,0 +1,10 @@
+<div class="content-div" *ngIf="project">
+    <h2>{{ project.projectName }}</h2>
+    <div>
+        Name:
+        <input [(ngModel)]="project.projectName" placeholder="Name"/>
+    </div>
+    <button (click)="updateProject(project)" *ngIf="project.projectId">Update</button>
+    <button (click)="deleteProject(project)" *ngIf="project.projectId">Delete</button>
+    <button (click)="createProject(project)" *ngIf="!project.projectId">Create</button>
+</div>

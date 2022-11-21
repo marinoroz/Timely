@@ -1,0 +1,35 @@
+<header>Timely</header>
+<div class="buttons-init">
+  <button class="floated" (click)="initNewProject()" *ngIf="!counting">Start</button>
+  <button class="floated" (click)="stopCounter()" *ngIf="counting">Stop</button>
+  <button class="floated" (click)="exportExcel()">Export</button>
+</div>
+<body>
+  <table class="content-table" id="excel-table">
+    <thead>
+      <th>Name</th>
+      <th>Start</th>
+      <th>Stop</th>
+      <th>Duration</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <ng-container>
+        <tr *ngFor="let project of projects">
+          <td>{{ project.projectName }}</td>
+          <td>{{ project.projectStart | date:'medium' }}</td>
+          <td>{{ project.projectStop | date:'medium'}}</td>
+          <td>{{ project.projectDuration }}</td>
+          <td><button (click)="editProject(project)">Edit</button></td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="counting">
+        <td>...</td>
+        <td>{{ dateTime | date:'medium'}}</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+<app-edit-project [project]="projectToStart" (projectsUpdated)="updateProjectList($event)"></app-edit-project>
